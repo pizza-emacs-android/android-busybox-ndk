@@ -7,6 +7,8 @@ ANDROID_NDK="/opt/android-ndk"
 # Pick your target ARCH (arm,mips,x86)
 ARCH?=x86
 
+HOST?=darwin-x86
+
 # Config to use
 CONFIG_FILE="./android_ndk_stericson-like"
 #CONFIG_FILE="android_ndk_config-w-patches" # contains more
@@ -20,7 +22,7 @@ SYSROOT="$(ANDROID_NDK)/platforms/android-14/arch-$(ARCH)"
 # ARM SETUP
 #
 ifeq ($(ARCH),arm)
-  GCC_PREFIX=$(ANDROID_NDK)/toolchains/arm-linux-androideabi-4.4.3/prebuilt/linux-x86/bin/arm-linux-androideabi-
+  GCC_PREFIX=$(ANDROID_NDK)/toolchains/arm-linux-androideabi-4.4.3/prebuilt/${HOST}/bin/arm-linux-androideabi-
   EXTRA_CFLAGS=-DANDROID -D__ANDROID__ -DSK_RELEASE -nostdlib -march=armv7-a -msoft-float -mfloat-abi=softfp -mfpu=neon -mthumb -mthumb-interwork -fpic -fno-short-enums -fgcse-after-reload -frename-registers
   EXTRA_LDFLAGS=-Xlinker -z -Xlinker muldefs -nostdlib -Bdynamic -Xlinker -dynamic-linker -Xlinker /system/bin/linker -Xlinker -z -Xlinker nocopyreloc -Xlinker --no-undefined \$${SYSROOT}/usr/lib/crtbegin_dynamic.o \$${SYSROOT}/usr/lib/crtend_android.o
 endif
@@ -30,7 +32,7 @@ endif
 # NOTE: MIPS_SIM_NABI32  is a 64bit ABI; Android uses MIPS_SIM_ABI32
 #
 ifeq ($(ARCH),mips)
-  GCC_PREFIX=$(ANDROID_NDK)/toolchains/mipsel-linux-android-4.4.3/prebuilt/linux-x86/bin/mipsel-linux-android-
+  GCC_PREFIX=$(ANDROID_NDK)/toolchains/mipsel-linux-android-4.4.3/prebuilt/${HOST}/bin/mipsel-linux-android-
   EXTRA_CFLAGS=-DANDROID -D__ANDROID__ -DSK_RELEASE -fpic -fno-short-enums -fgcse-after-reload -frename-registers  -U_MIPS_SIM -D_MIPS_SIM=_MIPS_SIM_ABI32
   EXTRA_LDFLAGS=-Xlinker -z -Xlinker muldefs -nostdlib -Bdynamic -Xlinker -dynamic-linker -Xlinker /system/bin/linker -Xlinker -z -Xlinker nocopyreloc -Xlinker --no-undefined \$${SYSROOT}/usr/lib/crtbegin_dynamic.o \$${SYSROOT}/usr/lib/crtend_android.o
 endif
@@ -39,7 +41,7 @@ endif
 # X86 SETUP
 #
 ifeq ($(ARCH),x86)
-  GCC_PREFIX=$(ANDROID_NDK)/toolchains/x86-4.4.3/prebuilt/linux-x86/bin/i686-android-linux-
+  GCC_PREFIX=$(ANDROID_NDK)/toolchains/x86-4.4.3/prebuilt/${HOST}/bin/i686-linux-android-
   EXTRA_CFLAGS=-DANDROID -D__ANDROID__ -DSK_RELEASE -nostdlib -fpic -fno-short-enums -fgcse-after-reload -frename-registers -Dhtons=__swap16 -Dhtonl=__swap32 -Dntohs=__swap16 -Dntohl=__swap32 -D_XOPEN_SOURCE -D_POSIX_C_SOURCE
   EXTRA_LDFLAGS=-Xlinker -z -Xlinker muldefs -nostdlib -Bdynamic -Xlinker -dynamic-linker -Xlinker /system/bin/linker -Xlinker -z -Xlinker nocopyreloc -Xlinker --no-undefined \$${SYSROOT}/usr/lib/crtbegin_dynamic.o \$${SYSROOT}/usr/lib/crtend_android.o
 endif
