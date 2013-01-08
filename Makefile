@@ -10,9 +10,9 @@ ARCH?=x86
 HOST?=darwin-x86
 
 # Config to use
-CONFIG_FILE="./android_ndk_stericson-like"
+#CONFIG_FILE="./android_ndk_stericson-like"
 #CONFIG_FILE="android_ndk_config-w-patches" # contains more
-
+CONFIG_FILE="android_ndk_config-emacs"
 
 # Following options should not be changed unless you know better
 BB_DIR="busybox-git.$(ARCH)"
