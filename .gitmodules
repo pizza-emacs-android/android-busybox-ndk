@@ -4,3 +4,9 @@
 [submodule "busybox-git.x86"]
 	path = busybox-git.x86
 	url = git://busybox.net/busybox.git
+[submodule "busybox-git.mips"]
+	path = busybox-git.mips
+	url = git://busybox.net/busybox.git
+[submodule "busybox-git.arm"]
+	path = busybox-git.arm
+	url = git://busybox.net/busybox.git
