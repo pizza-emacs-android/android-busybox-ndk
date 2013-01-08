@@ -1,3 +1,6 @@
 [submodule "busybox-git"]
 	path = busybox-git
 	url = git://busybox.net/busybox.git
+[submodule "busybox-git.x86"]
+	path = busybox-git.x86
+	url = git://busybox.net/busybox.git
