@@ -5,7 +5,7 @@
 ANDROID_NDK="/opt/android-ndk"
 
 # Pick your target ARCH (arm,mips,x86)
-ARCH=x86
+ARCH?=x86
 
 # Config to use
 CONFIG_FILE="./android_ndk_stericson-like"
